@@ -33,20 +33,20 @@ def mergeSort(input_list):
     #####
     if len(input_list) <= 1:
         inversion_count = 0
-        return input_list, inversion_count
+        return input_list, inversion_count#pass inversion_count up the tree
 
     #####
     #Recursive calls and book-keeping
     #####
     else:
         left_list, inversion_count = mergeSort(input_list[:len(input_list) // 2])
-        #Need the right_list_tuple variable as a temp holder so that inversion_
+        #Need the 'right_list_tuple' variable as a temp holder so that inversion_
         #count can be incremented.
         right_list_tuple = mergeSort(input_list[len(input_list) // 2:])
         right_list = right_list_tuple[0]
         inversion_count += right_list_tuple[1]
         sorted_list = merge(left_list, right_list)
-        return sorted_list, inversion_count
+        return sorted_list, inversion_count#pass up the inversion_count the tree
 
 if __name__ == '__main__':
     #Load in the data from a file
