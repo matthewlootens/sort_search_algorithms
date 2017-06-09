@@ -1,4 +1,4 @@
-def mergeSort(input_list):
+def mergesort(input_list):
     """
     input_list: a list of any n integers, duplicates allowed
     Returns a tuple:
@@ -39,20 +39,26 @@ def mergeSort(input_list):
     #Recursive calls and book-keeping
     #####
     else:
-        left_list, inversion_count = mergeSort(input_list[:len(input_list) // 2])
+        left_list, inversion_count = mergesort(input_list[:len(input_list) // 2])
         #Need the 'right_list_tuple' variable as a temp holder so that inversion_
         #count can be incremented.
-        right_list_tuple = mergeSort(input_list[len(input_list) // 2:])
+        right_list_tuple = mergesort(input_list[len(input_list) // 2:])
         right_list = right_list_tuple[0]
         inversion_count += right_list_tuple[1]
         sorted_list = merge(left_list, right_list)
         return sorted_list, inversion_count#pass up the inversion_count the tree
 
-if __name__ == '__main__':
-    #Load in the data from a file
+def main():
+    """
+    Test suite based on data in 'inversion_data.txt', a list of first 100,000
+    integers in random order.
+    """
     filename = 'inversion_data.txt'
     with open(filename) as f:
         datalist = []
         for line in f:
             datalist.append(int(line))
-    print(mergeSort(datalist)[1])#Correct answer: 2407905288 (2,407,905,288)
+    print(mergesort(datalist)[1])
+
+if __name__ == '__main__':
+    main()
